@@ -1,7 +1,7 @@
 ## EVOLUCIÓN AGRÍCOLA EN ESTADOS UNIDOS
-![Agricultura image](../tecnologia_agricultura.jpg)
-<sub>Fuente: Liste Maquinariat</sub>
+![Agricultura image](./NOTEBOOKS/images/tecnologia_agricultura.jpg)
 
+<sub>Fuente: Liste Maquinaria</sub>
 
 Este proyecto ha sido realizado como trabajo final del Máster de *Data Science* impartido por la escuela digital *KSchool*
 
