@@ -1,6 +1,8 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
+from fpdf import FPDF
+import base64
 
 import matplotlib as mpl
 import plotly.graph_objects as go
@@ -12,43 +14,192 @@ from plotly.subplots import make_subplots
 from statsmodels.graphics.factorplots import interaction_plot
 from plotly.subplots import make_subplots
 
+# LECTURA DATAFRAMES
+#------------------------------------------------#
+df_agrupation =  pd.read_csv('../DATOS/archivos creados analisis/agrupation.csv')
+df_agrupation.set_index('date', inplace=True)
 
-st.title("EVOLUCIÓN AGRÍCOLA EN ESTADOS UNIDOS")
+df_pp = pd.read_csv('../DATOS/archivos creados analisis/datos_PP.csv')
+df_pp.set_index('date', inplace=True)
 
-st.image('../NOTEBOOKS/images/agricultura-de-precisin.jpg', caption='Fuente: Acre Group')
-#st.subheader('How to run streamlit from windows')
-st.write('El cambio climático afecta directamente a la agricultura; estas alteraciones están principalmente relacionadas con el incremento de temperaturas que tienden a prolongar los periodos de sequía y con las precipitaciones que cada vez son menos frecuentes y más concentradas en el tiempo. Ambos factores pueden generar problemas como: inundaciones, cambios anormales en las temperaturas en distintas épocas del año, sequias prolongadas, escasez de agua, etc. Los efectos, entre otros, que estas problemáticas pueden tener sobre los cultivos son: estrés hídrico, proliferación de plagas, floraciones en épocas del año que no corresponden, incendios, inundaciones o dificultad en el desarrollo vegetativo.')
-st.write('Estos factores han hecho que la agricultura trate de adaptarse a los cambios producidos por estos problemas tendiendo hacia un cambio en los cultivos, ya sea modificando el tipo de cultivo de la región o cambiando a nuevas variedades de cultivos más resistentes.')
-st.write('Este trabajo tiene como objetivo el estudio de los cambios y modificaciones que se han ido produciendo en los cultivos de la región de Estados Unidos.')
-st.write('Autor: Alejandro Muñoz Molina')
+df_T = pd.read_csv('../DATOS/archivos creados analisis/datos_T.csv')
+df_T.set_index('date', inplace=True)
 
-st.sidebar.image('../NOTEBOOKS/images/agricultura-de-precisin.jpg', width=300)
+states_pp = pd.pivot_table(df_pp, index = df_pp.index, values = 'Precipitation', columns='State', aggfunc=np.mean)
+states_T = pd.pivot_table(df_T, index = df_T.index, values = 'Temperature', columns='State', aggfunc=np.mean)
 
-##############
-#indice lateral
-sidebar = st.sidebar
+df_sup_estado = pd.read_csv('../DATOS/archivos creados analisis/superficie_por_estado.csv')
+df_sup_cultivo =  pd.read_csv('../DATOS/archivos creados analisis/superficie_por_cultivos.csv')
 
-st.title("Representación gráfica de las variables de estudio")
 
-#Carga datos
-df =  pd.read_csv('../DATOS/archivos creados analisis/agrupation.csv')
-df.set_index('date', inplace=True)
+#INDICE SUPERIOR
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["INTRODUCCIÓN", "CLIMA", "SUPERFICIE", "EEUU", "DATOS"])
 
-#Mostrar tabla de datos:
-df_display = sidebar.checkbox("Mostrat tabla Variables", value=True)
-if df_display:
-    st.write(df)
+with tab1:
+    #INTRODUCCIÓN
+    #------------------------------------------------#
+    st.title("EVOLUCIÓN AGRÍCOLA EN ESTADOS UNIDOS")
 
-#Creación rango años
-slider = sidebar.slider('Años a representar', min_value= 1950, max_value=2021, value =  2021, step=1)
+    st.image('../NOTEBOOKS/images/agricultura-de-precisin.jpg', caption='Fuente: Acre Group')
+    #st.subheader('How to run streamlit from windows')
+    st.write('Estados Unidos es uno de los principales productores agrícolas a nivel global, especialmente en productos como la soja, maíz y algodón. Esto es posible gracias a las vastas extensiones de superficies agrícolas que pueden llegar a encontrarse y también a la diversidad de climas que están presentes en este país.')
+    st.write('A lo largo de la historia estas superficies agrícolas se han ido modificando. Actualmente el crecimiento de estas superficies no es una opción viable pero sí que lo es la modificación y adaptación de los cultivos influenciados por los nuevos factores a los que el sector agrario se enfrenta a día de hoy.')
+    st.write('Algunos ejemplos de estos factores pueden ser: el cambio climático, introducción de nuevas tecnologías en la agricultura o las políticas que se han ido desarrollando a lo largo de los años.')
+    st.write('Este trabajo está orientado al estudio de los factores climáticos y cuál ha sido la influencia en los cultivos agrícolas de Estados Unidos.')
+    st.write('Una vez realizado el estudio, se ha visto que la evolución de las temperaturas a lo largo de las décadas sí que ha tenido influencia en la modificación y evolución de las superficies de los principales cultivos de EEUU mientras que la precipitación no ha sido una variable tan influyente, ya que esta puede ser sustituida por técnicas de riego. ')
+    st.write('Autor: Alejandro Muñoz Molina')
+    st.write('Linkedin: https://www.linkedin.com/in/alex245/')
 
-subfig = make_subplots(specs=[[{"secondary_y": True}]])
-fig1 = px.line(x = slider, y = df['Temperature'], color_discrete_sequence=px.colors.qualitative.G10)
-fig2 = px.line(x = slider, y = df['Precipitation'], color_discrete_sequence=px.colors.qualitative.Dark2)
-fig2.update_traces(yaxis='y2')
-subfig.add_traces(fig1.data + fig2.data)
-subfig.layout.yaxis.title="Temperatura"
-subfig.layout.yaxis2.title="Precipitación"
 
-#st.plotly_chart(subfig, theme=None, use_container_width=True)
-st.write(subfig, slider)
+    
+    with open("../Memoria.pdf", "rb") as pdf_file:
+        PDFbyte = pdf_file.read()
+
+    st.download_button(label="Descarga Memoria proyecto",
+                       data=PDFbyte,
+                       file_name="Memoria.pdf",
+                       mime='application/octet-stream')
+
+
+
+with tab2:
+    #VARIABLES TEMPERATURA Y PRECIPITACIÓN
+    df_display = st.checkbox("Evolución variables clima en EEUU", value=True)
+    if df_display:
+        fig = make_subplots(specs=[[{"secondary_y": True}]])
+
+        fig.add_trace(go.Scatter(x=df_agrupation.index, y=df_agrupation['Temperature'], name="Temperature"), secondary_y=False,)
+        fig.add_trace(go.Scatter(x=df_agrupation.index, y=df_agrupation['Precipitation'], name="Precipitation"), secondary_y=True,)
+
+        fig.update_layout(title_text="Evolución de las variables Temperatura y Precipitación")
+
+        #fig.update_xaxes(title_text="date")
+        fig.update_yaxes(title_text="<b>Temperature</b>", secondary_y=False)
+        fig.update_yaxes(title_text="<b>Precipitation</b>", secondary_y=True)
+
+        fig.update_layout(legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=0.68))
+
+        st.plotly_chart(fig, theme=None, use_container_width=True)
+
+    df_display = st.checkbox("Evolución Precipitación EEUU2", value=True)
+    if df_display:
+        fig = px.line(states_pp)
+        st.plotly_chart(fig, theme=None, use_container_width=True)
+        
+
+    df_display = st.checkbox("Evolución Temperatura EEUU", value=True)
+    if df_display:
+        fig = px.line(states_T)
+        st.plotly_chart(fig, theme=None, use_container_width=True,)
+
+
+with tab3:
+    fig = px.line(df_sup_cultivo, x = 'year', y = 'hectare', color = 'commodity_desc')
+    fig.update_yaxes(title_text='Hectáreas')
+    fig.update_xaxes(title_text='')
+    st.plotly_chart(fig, theme=None, use_container_width=True)
+
+
+with tab4:
+    #EVOLUCIÓN TEMPERATUTA Y PRECIPITACIÓN EN EEUU POR ESTADOS
+    df_display = st.checkbox("Evolución temperatura EEUU", value=True)
+    if df_display:
+        fig = px.choropleth(df_T, locations="code", # used plotly express choropleth for animation plot
+                            locationmode= "USA-states",
+                            color="Temperature", 
+                            color_continuous_scale='PuBu',
+                            hover_name="State",
+                            scope="usa",
+                            hover_data=['Temperature'],
+                            animation_frame =df_T.index,
+                            labels={'Temperature':'The Temperature Change', 'Temperature':'Temperature'},
+                            title = 'Temperature Change - 1950 - 2021')
+        fig.update_layout(height=600)
+        st.plotly_chart(fig, theme=None, use_container_width=True)
+
+
+    #EVOLUCIÓN PRECIPITACIÓN EN EEUU POR ESTADOS
+    df_display = st.checkbox("Evolución precipitación EEUU", value=True)
+    if df_display:
+        fig = px.choropleth(df_pp, locations="code", # used plotly express choropleth for animation plot
+                            locationmode= "USA-states",
+                            color="Precipitation", 
+                            color_continuous_scale=px.colors.diverging.BrBG,
+                            hover_name="State",
+                            scope="usa",
+                            hover_data=['Precipitation'],
+                            animation_frame =df_pp.index,
+                            labels={'Precipitation':'Precipitation', 'Precipitation':'Precipitation'},
+                            title = 'Precipitation Change - 1950 - 2021')
+        fig.update_layout(height=600)
+        st.plotly_chart(fig, theme=None, use_container_width=True)
+
+    #EVOLUCIÓN SUPERFICIE EN EEUU POR ESTADOS
+    df_display = st.checkbox("Evolución superficie EEUU", value=True)
+    if df_display:
+        fig = px.choropleth(df_sup_estado, locations="code", 
+                            locationmode= "USA-states",
+                            color="hectare", 
+                            color_continuous_scale=px.colors.sequential.algae,
+                            hover_name="state_name",
+                            scope="usa",
+                            hover_data=['hectare'],
+                            animation_frame =df_sup_estado.year,
+                            labels={'hectare':'Hectáreas'},
+                            title = 'Evolución de la superficie agrícola')
+        fig.update_layout(height=600)
+        st.plotly_chart(fig, theme=None, use_container_width=True)
+
+
+#TABLA DE DATOS CON OPCIÓN A DESCARGA
+with tab5:
+    df_display = st.checkbox("variables de estudio para todo EEUU", value=True)
+    if df_display:
+        #Opción de descarga de datos:
+        @st.cache
+        def convert_df(df):
+            return df.to_csv().encode('utf-8')
+
+        csv = convert_df(df_agrupation)
+
+        st.download_button(
+            label="CSV",
+            data=csv,
+            file_name='Variables proyecto Evolución agrícola EEUU.csv',
+            mime='text/csv',
+        )
+        st.write(df_agrupation)
+
+    df_display = st.checkbox("Variable Precipitación para cada estado de EEUU", value=True)
+    if df_display:
+            #Opción de descarga de datos:
+        @st.cache
+        def convert_df(df):
+            return df.to_csv().encode('utf-8')
+
+        csv = convert_df(states_pp)
+
+        st.download_button(
+            label="CSV",
+            data=csv,
+            file_name='Precipitación_estados_EEUU.csv',
+            mime='text/csv',
+        )
+        st.write(states_pp)
+
+    df_display = st.checkbox("Variable Temperatura para cada estado de EEUU", value=True)
+    if df_display:
+        #Opción de descarga de datos:
+        @st.cache
+        def convert_df(df):
+            return df.to_csv().encode('utf-8')
+
+        csv = convert_df(states_pp)
+
+        st.download_button(
+            label="CSV",
+            data=csv,
+            file_name='Temperatura_estados_EEUU.csv',
+            mime='text/csv',
+        )    
+        st.write(states_T)
