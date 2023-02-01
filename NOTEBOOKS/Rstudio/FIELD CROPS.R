@@ -493,13 +493,12 @@ crops_2000 <- nass_data(sector_desc = 'CROPS',
 write.csv(crops_2000, "2000.csv")
 
 
-crops_2001 <- nass_data(
-                          sector_desc = 'CROPS',
-                          agg_level_desc = 'STATE',
+crops_2001 <- nass_data(sector_desc = 'CROPS',
+                        agg_level_desc = 'STATE',
                           
-                          year = "2001",
-                          freq_desc = 'ANNUAL',
-                          reference_period_desc = 'YEAR')
+                        year = "2001",
+                        freq_desc = 'ANNUAL',
+                        reference_period_desc = 'YEAR')
 write.csv(crops_2001, "2001.csv")
 
 

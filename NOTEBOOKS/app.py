@@ -37,7 +37,6 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(["INTRODUCCIÓN", "CLIMA", "SUPERFICIE", 
 
 with tab1:
     #INTRODUCCIÓN
-    #------------------------------------------------#
     st.title("EVOLUCIÓN AGRÍCOLA EN ESTADOS UNIDOS")
 
     st.image('../NOTEBOOKS/images/agricultura-de-precisin.jpg', caption='Fuente: Acre Group')
@@ -46,12 +45,14 @@ with tab1:
     st.write('A lo largo de la historia estas superficies agrícolas se han ido modificando. Actualmente el crecimiento de estas superficies no es una opción viable pero sí que lo es la modificación y adaptación de los cultivos influenciados por los nuevos factores a los que el sector agrario se enfrenta a día de hoy.')
     st.write('Algunos ejemplos de estos factores pueden ser: el cambio climático, introducción de nuevas tecnologías en la agricultura o las políticas que se han ido desarrollando a lo largo de los años.')
     st.write('Este trabajo está orientado al estudio de los factores climáticos y cuál ha sido la influencia en los cultivos agrícolas de Estados Unidos.')
-    st.write('Una vez realizado el estudio, se ha visto que la evolución de las temperaturas a lo largo de las décadas sí que ha tenido influencia en la modificación y evolución de las superficies de los principales cultivos de EEUU mientras que la precipitación no ha sido una variable tan influyente, ya que esta puede ser sustituida por técnicas de riego. ')
+    st.write('Una vez realizado el estudio, se ha visto que la evolución de las temperaturas a lo largo de las décadas sí que ha tenido influencia en la modificación y evolución de las superficies de los principales cultivos de EEUU mientras que la precipitación no ha sido una variable tan influyente, ya que esta puede ser sustituida por técnicas de riego.')
+
+    st.write('*Toda esta información se puede encontrar en el documento "Memoria.pdf" el cual queda disponible en el enlace de descarga situado más abajo.*')
+   
     st.write('Autor: Alejandro Muñoz Molina')
     st.write('Linkedin: https://www.linkedin.com/in/alex245/')
 
-
-    
+    #DESCARGA MEMORIA DEL PROYECTO
     with open("../Memoria.pdf", "rb") as pdf_file:
         PDFbyte = pdf_file.read()
 
@@ -61,46 +62,68 @@ with tab1:
                        mime='application/octet-stream')
 
 
-
 with tab2:
+    st.write('Este apartado tiene como objetivo mostrar la evolución de las variables de temperatura y precipitación a lo largo de los años en Estados Unidos.')
+    st.write('*Nota: Haciendo doble click en los diferentes nombres de las leyenda se quedaran representado únicamente el elemento seleccionado, también se pueden ir añadiendo o eliminando elementos de las leyendas para una mejor visualización de las gráficas.*')
+
     #VARIABLES TEMPERATURA Y PRECIPITACIÓN
     df_display = st.checkbox("Evolución variables clima en EEUU", value=True)
     if df_display:
+        
         fig = make_subplots(specs=[[{"secondary_y": True}]])
 
         fig.add_trace(go.Scatter(x=df_agrupation.index, y=df_agrupation['Temperature'], name="Temperature"), secondary_y=False,)
         fig.add_trace(go.Scatter(x=df_agrupation.index, y=df_agrupation['Precipitation'], name="Precipitation"), secondary_y=True,)
 
-        fig.update_layout(title_text="Evolución de las variables Temperatura y Precipitación")
+        fig.update_layout(title_text="Evolución de las variables Temperatura y Precipitación en EEUU")
 
         #fig.update_xaxes(title_text="date")
-        fig.update_yaxes(title_text="<b>Temperature</b>", secondary_y=False)
-        fig.update_yaxes(title_text="<b>Precipitation</b>", secondary_y=True)
+        fig.update_yaxes(title_text="<b>Temperatura (ºC)</b>", secondary_y=False)
+        fig.update_yaxes(title_text="<b>Precipitation (mm)</b>", secondary_y=True)
 
         fig.update_layout(legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=0.68))
 
         st.plotly_chart(fig, theme=None, use_container_width=True)
 
-    df_display = st.checkbox("Evolución Precipitación EEUU2", value=True)
+    df_display = st.checkbox("Evolución Precipitación EEUU", value=True)
     if df_display:
         fig = px.line(states_pp)
+        fig.update_layout(title_text="Evolución de la Precipitación en los diferentes estados de EEUU")
+        fig.update_yaxes(title_text="<b>Precipitación (mm)</b>", secondary_y=False)
         st.plotly_chart(fig, theme=None, use_container_width=True)
         
 
     df_display = st.checkbox("Evolución Temperatura EEUU", value=True)
     if df_display:
         fig = px.line(states_T)
-        st.plotly_chart(fig, theme=None, use_container_width=True,)
+        fig.update_layout(title_text="Evolución de la Temperatura en los diferentes estados de EEUU")
+        fig.update_yaxes(title_text="<b>Temperature (ºC)</b>", secondary_y=False)
+        st.plotly_chart(fig, theme=None, use_container_width=True)
 
 
 with tab3:
-    fig = px.line(df_sup_cultivo, x = 'year', y = 'hectare', color = 'commodity_desc')
-    fig.update_yaxes(title_text='Hectáreas')
-    fig.update_xaxes(title_text='')
-    st.plotly_chart(fig, theme=None, use_container_width=True)
+    st.write('Este apartado tiene como objetivo mostrar la evolución de las superficie de cada uno de los cultivos a lo largo de los años en EEUU.')
+    st.write('*Nota: Haciendo doble click en los diferentes nombres de las leyenda se quedaran representado únicamente el elemento seleccionado, también se pueden ir añadiendo o eliminando elementos de las leyendas para una mejor visualización de las gráficas.*')
+    #VARIABLEs SUPERFICIEs CULTIVOS
+    df_display = st.checkbox("Evolución de la superficie de cultivos", value=True)
+    if df_display:
+        fig = px.line(df_sup_cultivo, x = 'year', y = 'hectare', color = 'commodity_desc')
+        fig.update_yaxes(title_text='<b>Superficie (ha)</b>')
+        fig.update_layout(title_text='Evolución de la superficie diferenciado por cultivos')
+        st.plotly_chart(fig, theme=None, use_container_width=True)
+
+    df_display = st.checkbox("Evolución de la superficie de cultivos en cada estado", value=True)
+    if df_display:
+        fig = px.line(df_sup_estado, x = 'year', y = 'hectare', color = 'state_name')
+        fig.update_yaxes(title_text='<b>Superficie (ha)</b>')
+        fig.update_layout(title_text='Evolución de la superficie diferenciado por estados')
+        st.plotly_chart(fig, theme=None, use_container_width=True)
 
 
 with tab4:
+    st.write('Esta sección muestra la evolución a lo largo de los años para cada estado en EEUU de las diferentes variables de estudio.')
+    st.write('*Para esta visualización se debe hacer click en el botón "play" situado debajo de cada una de las figuras.*')
+
     #EVOLUCIÓN TEMPERATUTA Y PRECIPITACIÓN EN EEUU POR ESTADOS
     df_display = st.checkbox("Evolución temperatura EEUU", value=True)
     if df_display:
@@ -153,7 +176,9 @@ with tab4:
 
 #TABLA DE DATOS CON OPCIÓN A DESCARGA
 with tab5:
-    df_display = st.checkbox("variables de estudio para todo EEUU", value=True)
+    st.write('Esta sección muestra los datos que se han utilizado para realizar todo el estudio, haciendo click en el botón "CSV" es posible descargar las tablas de datos que sean de interés.')
+   
+    df_display = st.checkbox("Variables de estudio para todo EEUU", value=True)
     if df_display:
         #Opción de descarga de datos:
         @st.cache
