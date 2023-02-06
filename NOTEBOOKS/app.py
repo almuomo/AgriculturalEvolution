@@ -44,7 +44,13 @@ with tab1:
     st.write('Algunos ejemplos de estos factores pueden ser: el cambio climático, introducción de nuevas tecnologías en la agricultura o las políticas que se han ido desarrollando a lo largo de los años.')
     st.write('Este trabajo está orientado al estudio de los factores climáticos y cuál ha sido la influencia en los cultivos agrícolas de Estados Unidos.')
     st.write('Una vez realizado el estudio, se ha visto que la evolución de las temperaturas a lo largo de las décadas sí que ha tenido influencia en la modificación y evolución de las superficies de los principales cultivos de EEUU mientras que la precipitación no ha sido una variable tan influyente, ya que esta puede ser sustituida por técnicas de riego.')
+<<<<<<< HEAD
     st.write('*Toda esta información se puede encontrar en el documento "Memoria.pdf" el cual queda disponible en el enlace de descarga situado más abajo.*') 
+=======
+
+    st.write('*Toda esta información se puede encontrar en el documento "Memoria.pdf" el cual queda disponible en el enlace de descarga situado más abajo.*')
+   
+>>>>>>> 37345b3b3441e9489eb4f3f7a6151a250ab83491
     st.write('Autor: Alejandro Muñoz Molina')
     st.write('Linkedin: https://www.linkedin.com/in/alex245/')
 
@@ -57,6 +63,10 @@ with tab1:
                        file_name="Memoria.pdf",
                        mime='application/octet-stream')
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 37345b3b3441e9489eb4f3f7a6151a250ab83491
 with tab2:
     st.write('Este apartado tiene como objetivo mostrar la evolución de las variables de temperatura y precipitación a lo largo de los años en Estados Unidos.')
     st.write('*Nota: Haciendo doble click en los diferentes nombres de las leyenda se quedaran representado únicamente el elemento seleccionado, también se pueden ir añadiendo o eliminando elementos de las leyendas para una mejor visualización de las gráficas.*')
@@ -94,9 +104,16 @@ with tab2:
         fig.update_layout(title_text="Evolución de la Temperatura en los diferentes estados de EEUU")
         fig.update_yaxes(title_text="<b>Temperature (ºC)</b>", secondary_y=False)
         st.plotly_chart(fig, theme=None, use_container_width=True)
+<<<<<<< HEAD
 
 with tab3:
     st.write('Este apartado tiene como objetivo mostrar la evolución de las superficie de cada uno de los cultivos y en cada uno de los estados a lo largo de los años en EEUU.')
+=======
+
+
+with tab3:
+    st.write('Este apartado tiene como objetivo mostrar la evolución de las superficie de cada uno de los cultivos a lo largo de los años en EEUU.')
+>>>>>>> 37345b3b3441e9489eb4f3f7a6151a250ab83491
     st.write('*Nota: Haciendo doble click en los diferentes nombres de las leyenda se quedaran representado únicamente el elemento seleccionado, también se pueden ir añadiendo o eliminando elementos de las leyendas para una mejor visualización de las gráficas.*')
     #VARIABLEs SUPERFICIEs CULTIVOS
     df_display = st.checkbox("Evolución de la superficie de cultivos", value=True)
@@ -105,6 +122,16 @@ with tab3:
         fig.update_yaxes(title_text='<b>Superficie (ha)</b>')
         fig.update_layout(title_text='Evolución de la superficie diferenciado por cultivos')
         st.plotly_chart(fig, theme=None, use_container_width=True)
+<<<<<<< HEAD
+=======
+
+    df_display = st.checkbox("Evolución de la superficie de cultivos en cada estado", value=True)
+    if df_display:
+        fig = px.line(df_sup_estado, x = 'year', y = 'hectare', color = 'state_name')
+        fig.update_yaxes(title_text='<b>Superficie (ha)</b>')
+        fig.update_layout(title_text='Evolución de la superficie diferenciado por estados')
+        st.plotly_chart(fig, theme=None, use_container_width=True)
+>>>>>>> 37345b3b3441e9489eb4f3f7a6151a250ab83491
 
     df_display = st.checkbox("Evolución de la superficie de cultivos en cada estado", value=True)
     if df_display:
