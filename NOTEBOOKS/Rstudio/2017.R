@@ -162,9 +162,6 @@ crops39 <- nass_data(sector_desc = 'CROPS',agg_level_desc = 'STATE',
                      state_name = "MASSACHUSETTS",year = "2017",  freq_desc = 'ANNUAL',reference_period_desc = 'YEAR')
 write.csv(crops39, "crops39.csv")
 
-crops40 <- nass_data(sector_desc = 'CROPS',agg_level_desc = 'STATE',  
-                     state_name = "MICHIGAN",year = "2017",  freq_desc = 'ANNUAL',reference_period_desc = 'YEAR')
-write.csv(crops40, "crops40.csv")
 
 crops41 <- nass_data(sector_desc = 'CROPS',agg_level_desc = 'STATE',  
                      state_name = "KANSAS",year = "2017",  freq_desc = 'ANNUAL',reference_period_desc = 'YEAR')

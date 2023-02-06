@@ -16,5 +16,33 @@ Este trabajo está orientado al estudio de los factores climáticos y cuál ha s
 
 Una vez realizado el estudio, se ha visto que la evolución de las temperaturas a lo largo de las décadas sí que ha tenido influencia en la modificación y evolución de las superficies de los principales cultivos de EEUU mientras que la precipitación no ha sido una variable tan influyente, ya que esta puede ser sustituida por técnicas de riego. 
 
+Enlace para descargar datos para este trabajo: https://drive.google.com/file/d/1DLSV4y4flE0dNCapLtlOjPMBgmcXZ03O/view?usp=share_link
+
+Librerias y elementos instalados para la lectura de los notebook:
+
+- pandas
+- matplotlib
+- plotly
+- seaborn
+- bs4
+- selenium
+- nbformat
+- openpyxl
+- statsmodels
+- phik
+- pingouin
+- pydot
+- graphviz
+- minepy: Antes de instalar esta libreria es necesario tener instalado "Microsoft C++ Build Tools", en caso de no tenerlo instalado para visual studio se puede descargar en:  https://visualstudio.microsoft.com/es/visual-cpp-build-tools/ 
+          Este enlace explica como realizar la instalación del paquete de C++ necesario: https://youtu.be/CwT490K4TAo
+          Una vez realizado este proceso se puede proceder a instalar minepy: pip install minepy --use-pep517
+- shap
+- xgboost
+- chromedriver --> este driver se utiliza para correr el notebook 1_WebScraping, se encuentra localizado en "../DATOS/chromedriver", en el caso de que el codigo de error revisar que tanto el chromedriver como el buscador, en este caso chrome, tienen la misma versión en caso contrario, descargar el chromedriver igual a la versión de google chrome. Enlace a la pagina web: https://chromedriver.chromium.org/downloads 
+- opencv-python
+- -U scikit-learn
+- fpdf
+- writefile
+
 #### Autor: Alejandro Muñoz Molina
 #### LinkedIn: https://www.linkedin.com/in/alex245/   
