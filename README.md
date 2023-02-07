@@ -49,33 +49,5 @@ https://drive.google.com/file/d/1DLSV4y4flE0dNCapLtlOjPMBgmcXZ03O/view?usp=share
           Una vez realizado este proceso se puede proceder a instalar minepy: pip install minepy --use-pep517
 - chromedriver --> este driver se utiliza para correr el notebook 1_WebScraping, se encuentra localizado en "../DATOS/chromedriver", en el caso de que el codigo de error revisar que tanto el chromedriver como el buscador, en este caso chrome, tienen la misma versión en caso contrario, descargar el chromedriver igual a la versión de google chrome. Enlace a la pagina web: https://chromedriver.chromium.org/downloads 
 
-Enlace para descargar datos para este trabajo: https://drive.google.com/file/d/1DLSV4y4flE0dNCapLtlOjPMBgmcXZ03O/view?usp=share_link
-
-Librerias y elementos instalados para la lectura de los notebook:
-
-- pandas
-- matplotlib
-- plotly
-- seaborn
-- bs4
-- selenium
-- nbformat
-- openpyxl
-- statsmodels
-- phik
-- pingouin
-- pydot
-- graphviz
-- minepy: Antes de instalar esta libreria es necesario tener instalado "Microsoft C++ Build Tools", en caso de no tenerlo instalado para visual studio se puede descargar en:  https://visualstudio.microsoft.com/es/visual-cpp-build-tools/ 
-          Este enlace explica como realizar la instalación del paquete de C++ necesario: https://youtu.be/CwT490K4TAo
-          Una vez realizado este proceso se puede proceder a instalar minepy: pip install minepy --use-pep517
-- shap
-- xgboost
-- chromedriver --> este driver se utiliza para correr el notebook 1_WebScraping, se encuentra localizado en "../DATOS/chromedriver", en el caso de que el codigo de error revisar que tanto el chromedriver como el buscador, en este caso chrome, tienen la misma versión en caso contrario, descargar el chromedriver igual a la versión de google chrome. Enlace a la pagina web: https://chromedriver.chromium.org/downloads 
-- opencv-python
-- -U scikit-learn
-- fpdf
-- writefile
-
 #### Autor: Alejandro Muñoz Molina
 #### LinkedIn: https://www.linkedin.com/in/alex245/     
