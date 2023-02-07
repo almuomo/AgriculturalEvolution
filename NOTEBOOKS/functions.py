@@ -273,7 +273,11 @@ def Linear_Regression(X_train, X_test, y_train, y_test):
     #Resultados
     print('(MAE) Test Mean absolute error:',mean_absolute_error(y_test,y_pred).round(2))
     print('(MSE) Test mean squared error:', np.sqrt(mean_absolute_error(y_test,y_pred)).round(2))
+<<<<<<< HEAD
     print('Test R2 score:',r2_score(y_test, y_pred).round(2))
+=======
+    print('Test R2 score:',r2_score(y_test,y_pred, force_finite = True).round(2))
+>>>>>>> d9ce01b62d6ebaaf30fdddc766cd3c1226bc8464
 
     #Representación grafica de los valores predecidos y los valores de Test
     fig = go.Figure()
@@ -359,7 +363,7 @@ def K_Nearest_Neighbour_Regressor(X_train, X_test, y_train, y_test):
     #Resultados
     print('(MAE) Test Mean absolute error:',mean_absolute_error(y_test,y_pred).round(2))
     print('(MSE) Test mean squared error:', np.sqrt(mean_absolute_error(y_test,y_pred)).round(2))
-    print('Test R2 score:',r2_score(y_test,y_pred).round(2))
+    print('Test R2 score:',r2_score(y_test,y_pred, force_finite = True).round(2))
 
     #Representación grafica de los valores predecidos y los valores de Test
     fig = go.Figure()
@@ -474,7 +478,12 @@ def Random_Forest_regressor(X_train, X_test, y_train, y_test, criterion:str, max
     #Resultados
     print('(MAE) Test Mean absolute error:',mean_absolute_error(y_test,y_pred).round(3))
     print('(MSE) Test mean squared error:', np.sqrt(mean_absolute_error(y_test,y_pred)).round(3))
+<<<<<<< HEAD
     print('Test R2 score:',r2_score(y_test,y_pred).round(3))
+=======
+    print('Test R2 score:',r2_score(y_test,y_pred, force_finite = True).round(3))
+    print(modelo.oob_score_) #sobreajuste del modelo (>0.75, no se sobreajusta)
+>>>>>>> d9ce01b62d6ebaaf30fdddc766cd3c1226bc8464
 
     #Representación grafica de los valores predecidos y los valores de Test
     fig = go.Figure()
@@ -588,7 +597,7 @@ def XGB_Regressor(X_train, X_test, y_train, y_test, gamma: float, max_depth: int
     #Resultados
     print('(MAE) Test Mean absolute error:',mean_absolute_error(y_test,y_pred).round(3))
     print('(MSE) Test mean squared error:', np.sqrt(mean_absolute_error(y_test,y_pred)).round(3))
-    print('Test R2 score:',r2_score(y_test,y_pred).round(3))
+    print('Test R2 score:',r2_score(y_test,y_pred, force_finite = True).round(3))
 
 
     #Representación grafica de los valores predecidos y los valores de Test
