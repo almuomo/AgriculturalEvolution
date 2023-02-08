@@ -18,13 +18,11 @@ Una vez realizado el estudio, se ha visto que la evolución de las temperaturas 
 
 
 ### Enlace para descargar datos para este trabajo:
- 
 https://drive.google.com/drive/folders/1q5XLojqI__ObQZ4a8lkxqT_3HwAyReSN?usp=share_link
 
 Nota: Para ejecutar el codigo sin problemas este enlace descargara un archivo "DATOS" que se debe localizar en la carpeta AgriculturalEvolution junto con los archivos de NOTEBOOK y Graphviz
 
 ### Librerias y elementos instalados para la lectura de los notebook:
-
 - pandas
 - matplotlib
 - plotly
