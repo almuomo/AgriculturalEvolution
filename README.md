@@ -5,7 +5,7 @@
 Este proyecto ha sido realizado como trabajo final del Máster de *Data Science* impartido por la escuela digital *KSchool*
 
 ## Propósito del proyecto
-Estados Unidos es uno de los principales productores agrícolas a nivel global, especialmente en productos como la soja, maíz y algodón. Esto es posible gracias a las vastas extensiones de superficies agrícolas que pueden llegar a encontrarse y también a la diversidad de climas que están presentes en este país. 
+Estados Unidos es uno de los principales productores agrícolas a nivel global, especialmente en productos como la soja, maíz y trigo. Esto es posible gracias a las vastas extensiones de superficies agrícolas que pueden llegar a encontrarse y también a la diversidad de climas que están presentes en este país. 
 
 A lo largo de la historia estas superficies agrícolas se han ido modificando. Actualmente el crecimiento de estas superficies no es una opción viable pero sí que lo es la modificación y adaptación de los cultivos influenciados por los nuevos factores a los que el sector agrario se enfrenta a día de hoy.
 
