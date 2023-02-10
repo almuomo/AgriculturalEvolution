@@ -29,7 +29,7 @@ Los notebooks en los cuales se distribullen el trabajo son:
 - 4.3_Anáisis_superficies
 - 4.4_Análisis_multivariante
 - 5_modelo
-- 6_streamlit
+- 6_streamlit 
 
 Cada notebook es independiente uno del otro y no es necesario ejecutar el notebook anterior para pasar al siguiente.
 Los tres primeros notebook junto con el archivo de Rstudio, hacen referencia a la descarga y transformación de datos, todos ellos recogidos en el archivo DATOS, descargados con el enlace anterior
