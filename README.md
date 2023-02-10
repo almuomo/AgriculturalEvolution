@@ -21,11 +21,15 @@ https://drive.google.com/drive/folders/1q5XLojqI__ObQZ4a8lkxqT_3HwAyReSN?usp=sha
 
 Los notebooks en los cuales se distribullen el trabajo son:
 
-- 1_WebScraping                                 - 4.3_Anáisis_superficies
-- 2_Transformación_datos_Temp_y_PP              - 4.4_Análisis_multivariante
-- 3_Transformación_datos_Sup_de_cultivo         - 5_modelo
-- 4.1_Análisis_PP                               - 6_streamlit
+- 1_WebScraping
+- 2_Transformación_datos_Temp_y_PP
+- 3_Transformación_datos_Sup_de_cultivo
+- 4.1_Análisis_PP
 - 4.2_Análisis_T
+- 4.3_Anáisis_superficies
+- 4.4_Análisis_multivariante
+- 5_modelo
+- 6_streamlit
 
 Cada notebook es independiente uno del otro y no es necesario ejecutar el notebook anterior para pasar al siguiente.
 Los tres primeros notebook junto con el archivo de Rstudio, hacen referencia a la descarga y transformación de datos, todos ellos recogidos en el archivo DATOS, descargados con el enlace anterior
