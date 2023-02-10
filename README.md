@@ -19,7 +19,24 @@ Una vez realizado el estudio, se ha visto que la evolución de las temperaturas 
 ### Enlace para descargar datos para este trabajo:
 https://drive.google.com/drive/folders/1q5XLojqI__ObQZ4a8lkxqT_3HwAyReSN?usp=share_link
 
-Nota: Para ejecutar el codigo sin problemas este enlace descargara un archivo "DATOS" que se debe descomprimir y localizar en la carpeta AgriculturalEvolution junto con los archivos de NOTEBOOK y Graphviz.
+Los notebooks en los cuales se distribullen el trabajo son:
+
+1_WebScraping
+2_Transformación_datos_Temp_y_PP
+3_Transformación_datos_Sup_de_cultivo
+4.1_Análisis_PP
+4.2_Análisis_T
+4.3_Anáisis_superficies
+4.4_Análisis_multivariante
+5_modelo
+6_streamlit
+
+Cada notebook es independiente uno del otro y no es necesario ejecutar el notebook anterior para pasar al siguiente.
+Los tres primeros notebook junto con el archivo de Rstudio, hacen referencia a la descarga y transformación de datos, todos ellos recogidos en el archivo DATOS, descargados con el enlace anterior
+Los notebooks con punto 4 hace referencia al análisis de las variables y los notebooks 5 y 6 como su propio nombre indican es donde se encuentra el estudio de modelos y aplicación web.
+
+Nota: Para ejecutar el codigo sin problemas el archivo "DATOS" descargado se debe descomprimir y localizar en la carpeta AgriculturalEvolution junto con los archivos de NOTEBOOK y Graphviz.
+
 ### Librerias y elementos instalados para la lectura de los notebook:
 - pandas
 - matplotlib
